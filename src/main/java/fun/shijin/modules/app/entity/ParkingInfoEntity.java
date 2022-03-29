@@ -5,51 +5,52 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * 用户表
+ * 停车场信息表
  * 
  * @author tcq
  * @email 2433313140@qq.com
  * @date 2022-03-29 12:51:27
  */
 @Data
-@TableName("pms_user")
-public class UserEntity implements Serializable {
+@TableName("pms_parking_info")
+public class ParkingInfoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 用户id
+	 * id
 	 */
 	@TableId
 	private Integer id;
 	/**
-	 * 角色id
-	 */
-	private Integer roleId;
-	/**
-	 * 用户名
+	 * 停车场名
 	 */
 	private String name;
 	/**
-	 * 密码
+	 * 联系人
 	 */
-	private String password;
+	private String contacts;
 	/**
-	 * 性别
-	 */
-	private Integer gender;
-	/**
-	 * 电话号码
+	 * 停车场电话
 	 */
 	private String phone;
 	/**
-	 * 住址
+	 * 停车场地址
 	 */
 	private String address;
 	/**
-	 * 车牌号
+	 * 总车位
 	 */
-	private String licencePlate;
+	private Integer totalSpaces;
+	/**
+	 * 剩余车位
+	 */
+	private Integer surplusSpaces;
+	/**
+	 * 创建时间
+	 */
+	private Date createTime;
 
 }

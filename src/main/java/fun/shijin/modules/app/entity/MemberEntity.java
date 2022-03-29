@@ -7,15 +7,15 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 用户表
+ * 会员表
  * 
  * @author tcq
  * @email 2433313140@qq.com
  * @date 2022-03-29 12:51:27
  */
 @Data
-@TableName("pms_user")
-public class UserEntity implements Serializable {
+@TableName("pms_member")
+public class MemberEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -26,30 +26,14 @@ public class UserEntity implements Serializable {
 	/**
 	 * 角色id
 	 */
-	private Integer roleId;
+	private Integer userId;
 	/**
-	 * 用户名
+	 * 注册时间
 	 */
-	private String name;
+	private String createTime;
 	/**
-	 * 密码
+	 * 到期时间
 	 */
-	private String password;
-	/**
-	 * 性别
-	 */
-	private Integer gender;
-	/**
-	 * 电话号码
-	 */
-	private String phone;
-	/**
-	 * 住址
-	 */
-	private String address;
-	/**
-	 * 车牌号
-	 */
-	private String licencePlate;
+	private String expirationTime;
 
 }

@@ -26,7 +26,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 
 	@Override
 	public UserEntity queryByMobile(String mobile) {
-		return baseMapper.selectOne(new QueryWrapper<UserEntity>().eq("mobile", mobile));
+		return baseMapper.selectOne(new QueryWrapper<UserEntity>().eq("phone", mobile));
 	}
 
 	@Override
@@ -39,6 +39,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 			throw new RRException("手机号或密码错误");
 		}
 
-		return user.getUserId();
+		return user.getId();
 	}
 }

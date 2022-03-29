@@ -7,49 +7,37 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 用户表
+ * 车位表
  * 
  * @author tcq
  * @email 2433313140@qq.com
  * @date 2022-03-29 12:51:27
  */
 @Data
-@TableName("pms_user")
-public class UserEntity implements Serializable {
+@TableName("pms_space")
+public class SpaceEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 用户id
+	 * 车位id
 	 */
 	@TableId
 	private Integer id;
 	/**
-	 * 角色id
+	 * 车位编号
 	 */
-	private Integer roleId;
+	private String number;
 	/**
-	 * 用户名
+	 * 车位位置
 	 */
-	private String name;
+	private String section;
 	/**
-	 * 密码
+	 * 车位状态
 	 */
-	private String password;
+	private Integer state;
 	/**
-	 * 性别
+	 * 车位类型(0:固定车位，1:出租车位，2:临时车位)
 	 */
-	private Integer gender;
-	/**
-	 * 电话号码
-	 */
-	private String phone;
-	/**
-	 * 住址
-	 */
-	private String address;
-	/**
-	 * 车牌号
-	 */
-	private String licencePlate;
+	private Integer typeId;
 
 }

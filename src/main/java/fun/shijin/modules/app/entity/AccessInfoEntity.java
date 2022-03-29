@@ -5,51 +5,41 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.util.Date;
 
 /**
- * 用户表
+ * 车辆进出表
  * 
  * @author tcq
  * @email 2433313140@qq.com
  * @date 2022-03-29 12:51:27
  */
 @Data
-@TableName("pms_user")
-public class UserEntity implements Serializable {
+@TableName("pms_access_info")
+public class AccessInfoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 用户id
+	 * id
 	 */
 	@TableId
 	private Integer id;
 	/**
-	 * 角色id
+	 * 用户id
 	 */
-	private Integer roleId;
-	/**
-	 * 用户名
-	 */
-	private String name;
-	/**
-	 * 密码
-	 */
-	private String password;
-	/**
-	 * 性别
-	 */
-	private Integer gender;
-	/**
-	 * 电话号码
-	 */
-	private String phone;
-	/**
-	 * 住址
-	 */
-	private String address;
+	private Integer userId;
 	/**
 	 * 车牌号
 	 */
 	private String licencePlate;
+	/**
+	 * 进入时间
+	 */
+	private Date entryTime;
+	/**
+	 * 出去时间
+	 */
+	private Time outTime;
 
 }

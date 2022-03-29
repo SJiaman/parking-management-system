@@ -44,10 +44,10 @@ public class AppRegisterController {
         ValidatorUtils.validateEntity(form);
 
         UserEntity user = new UserEntity();
-        user.setMobile(form.getMobile());
-        user.setUsername(form.getMobile());
+        user.setPhone(form.getMobile());
+        user.setName(form.getMobile());
         user.setPassword(DigestUtils.sha256Hex(form.getPassword()));
-        user.setCreateTime(new Date());
+//        user.setCreateTime(new Date());
         userService.save(user);
 
         return R.ok();
