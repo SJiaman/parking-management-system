@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fun.shijin.modules.pms.dao.AccessInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="fun.shijin.modules.pms.entity.AccessInfoEntity" id="accessInfoMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="licencePlate" column="licence_plate"/>
+        <result property="entryTime" column="entry_time"/>
+        <result property="outTime" column="out_time"/>
+    </resultMap>
+
+
+</mapper>
