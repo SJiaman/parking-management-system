@@ -4,7 +4,7 @@
 <mapper namespace="fun.shijin.modules.pms.dao.RoleDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="fun.shijin.modules.pms.entity.RoleEntity" id="roleMap">
+    <resultMap type="fun.shijin.modules.app.entity.RoleEntity" id="roleMap">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>

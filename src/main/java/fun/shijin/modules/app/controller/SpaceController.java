@@ -20,7 +20,7 @@ import java.util.Map;
  * @date 2022-03-29 12:51:27
  */
 @RestController
-@RequestMapping("pms/space")
+@RequestMapping("app/space")
 public class SpaceController {
     @Autowired
     private SpaceService spaceService;
@@ -33,6 +33,7 @@ public class SpaceController {
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = spaceService.queryPage(params);
 
+//        System.out.println(page);
         return R.ok().put("page", page);
     }
 

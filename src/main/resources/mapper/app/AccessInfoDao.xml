@@ -4,7 +4,7 @@
 <mapper namespace="fun.shijin.modules.pms.dao.AccessInfoDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="fun.shijin.modules.pms.entity.AccessInfoEntity" id="accessInfoMap">
+    <resultMap type="fun.shijin.modules.app.entity.AccessInfoEntity" id="accessInfoMap">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="licencePlate" column="licence_plate"/>

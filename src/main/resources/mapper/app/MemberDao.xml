@@ -4,7 +4,7 @@
 <mapper namespace="fun.shijin.modules.pms.dao.MemberDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="fun.shijin.modules.pms.entity.MemberEntity" id="memberMap">
+    <resultMap type="fun.shijin.modules.app.entity.MemberEntity" id="memberMap">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="createTime" column="create_time"/>

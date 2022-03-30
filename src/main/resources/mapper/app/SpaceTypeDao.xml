@@ -4,7 +4,7 @@
 <mapper namespace="fun.shijin.modules.pms.dao.SpaceTypeDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="fun.shijin.modules.pms.entity.SpaceTypeEntity" id="spaceTypeMap">
+    <resultMap type="fun.shijin.modules.app.entity.SpaceTypeEntity" id="spaceTypeMap">
         <result property="id" column="id"/>
         <result property="type" column="type"/>
     </resultMap>

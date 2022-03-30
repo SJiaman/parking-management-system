@@ -4,7 +4,7 @@
 <mapper namespace="fun.shijin.modules.pms.dao.ParkingInfoDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="fun.shijin.modules.pms.entity.ParkingInfoEntity" id="parkingInfoMap">
+    <resultMap type="fun.shijin.modules.app.entity.ParkingInfoEntity" id="parkingInfoMap">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="contacts" column="contacts"/>
