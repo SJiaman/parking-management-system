@@ -47,3 +47,7 @@ spring:
 #      url: jdbc:postgresql://localhost:5432/renren_security
 #      username: renren
 #      password: 123456
+baidu:
+    appId: 26072861
+    apiKey: cvsNByQayjQOdx6KiLRH2GqM
+    secretKey: 0QGaRuq41HvbUEkiMWIUiet50YFFL2th

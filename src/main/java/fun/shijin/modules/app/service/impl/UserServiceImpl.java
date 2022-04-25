@@ -10,8 +10,11 @@ package fun.shijin.modules.app.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import fun.shijin.common.exception.RRException;
+import fun.shijin.common.utils.PageUtils;
+import fun.shijin.common.utils.Query;
 import fun.shijin.common.validator.Assert;
 import fun.shijin.modules.app.dao.UserDao;
 import fun.shijin.modules.app.entity.UserEntity;
@@ -19,6 +22,8 @@ import fun.shijin.modules.app.form.LoginForm;
 import fun.shijin.modules.app.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 
 @Service("userService")
@@ -40,5 +45,15 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 		}
 
 		return user.getId();
+	}
+
+	@Override
+	public PageUtils queryPage(Map<String, Object> params) {
+		IPage<UserEntity> page = this.page(
+				new Query<UserEntity>().getPage(params),
+				new QueryWrapper<UserEntity>()
+		);
+
+		return new PageUtils(page);
 	}
 }

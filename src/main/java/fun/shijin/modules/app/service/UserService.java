@@ -10,8 +10,11 @@ package fun.shijin.modules.app.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import fun.shijin.common.utils.PageUtils;
 import fun.shijin.modules.app.entity.UserEntity;
 import fun.shijin.modules.app.form.LoginForm;
+
+import java.util.Map;
 
 /**
  * 用户
@@ -28,4 +31,6 @@ public interface UserService extends IService<UserEntity> {
 	 * @return        返回用户ID
 	 */
 	long login(LoginForm form);
+
+	PageUtils queryPage(Map<String, Object> params);
 }

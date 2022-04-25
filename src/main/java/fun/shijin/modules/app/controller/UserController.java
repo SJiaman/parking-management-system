@@ -25,16 +25,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    /**
-//     * 列表
-//     */
-//    @RequestMapping("/list")
-//    @RequiresPermissions("pms:user:list")
-//    public R list(@RequestParam Map<String, Object> params){
-//        PageUtils page = userService.queryPage(params);
-//
-//        return R.ok().put("page", page);
-//    }
+    /**
+     * 列表
+     */
+    @RequestMapping("/list")
+    @RequiresPermissions("pms:user:list")
+    public R list(@RequestParam Map<String, Object> params){
+        PageUtils page = userService.queryPage(params);
+
+        return R.ok().put("page", page);
+    }
 
 
     /**
