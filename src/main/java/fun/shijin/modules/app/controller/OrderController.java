@@ -3,8 +3,8 @@ package fun.shijin.modules.app.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import fun.shijin.modules.app.entity.PriceEntity;
-import fun.shijin.modules.app.service.PriceService;
+import fun.shijin.modules.app.entity.OrderEntity;
+import fun.shijin.modules.app.service.OrderService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,25 +18,25 @@ import fun.shijin.common.utils.R;
 
 
 /**
- * 收费表
+ * 订单表
  *
  * @author tcq
  * @email 2433313140@qq.com
  * @date 2022-04-27 13:23:20
  */
 @RestController
-@RequestMapping("pms/price")
-public class PriceController {
+@RequestMapping("pms/order")
+public class OrderController {
     @Autowired
-    private PriceService priceService;
+    private OrderService orderService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("pms:price:list")
+    @RequiresPermissions("pms:order:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = priceService.queryPage(params);
+        PageUtils page = orderService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -46,20 +46,20 @@ public class PriceController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("pms:price:info")
+    @RequiresPermissions("pms:order:info")
     public R info(@PathVariable("id") Integer id){
-		PriceEntity price = priceService.getById(id);
+		OrderEntity order = orderService.getById(id);
 
-        return R.ok().put("price", price);
+        return R.ok().put("order", order);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("pms:price:save")
-    public R save(@RequestBody PriceEntity price){
-		priceService.save(price);
+    @RequiresPermissions("pms:order:save")
+    public R save(@RequestBody OrderEntity order){
+		orderService.save(order);
 
         return R.ok();
     }
@@ -68,9 +68,9 @@ public class PriceController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("pms:price:update")
-    public R update(@RequestBody PriceEntity price){
-		priceService.updateById(price);
+    @RequiresPermissions("pms:order:update")
+    public R update(@RequestBody OrderEntity order){
+		orderService.updateById(order);
 
         return R.ok();
     }
@@ -79,9 +79,9 @@ public class PriceController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("pms:price:delete")
+    @RequiresPermissions("pms:order:delete")
     public R delete(@RequestBody Integer[] ids){
-		priceService.removeByIds(Arrays.asList(ids));
+		orderService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

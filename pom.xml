@@ -51,12 +51,6 @@
 	</properties>
 
 	<dependencies>
-		<!--百度人工智能SDK-->
-		<dependency>
-			<groupId>com.baidu.aip</groupId>
-			<artifactId>java-sdk</artifactId>
-			<version>4.12.0</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -237,6 +231,12 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
+		</dependency>
+		<!--百度人工智能SDK-->
+		<dependency>
+			<groupId>com.baidu.aip</groupId>
+			<artifactId>java-sdk</artifactId>
+			<version>4.12.0</version>
 		</dependency>
 	</dependencies>
 

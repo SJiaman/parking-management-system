@@ -3,21 +3,20 @@ package fun.shijin.modules.app.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
-import java.math.BigDecimal;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 收费表
+ * 订单表
  * 
  * @author tcq
  * @email 2433313140@qq.com
  * @date 2022-04-27 13:23:20
  */
 @Data
-@TableName("pms_price")
-public class PriceEntity implements Serializable {
+@TableName("pms_order")
+public class OrderEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -26,20 +25,24 @@ public class PriceEntity implements Serializable {
 	@TableId
 	private Integer id;
 	/**
-	 * 免费时长
+	 * 订单号
 	 */
-	private Integer freeTime;
+	private Integer orderId;
 	/**
-	 * 计时单位
+	 * 收费金额
 	 */
-	private Integer timeUnit;
+	private Double money;
 	/**
-	 * 单位费用
+	 * 车牌号
 	 */
-	private BigDecimal unitCost;
+	private String licencePlate;
 	/**
-	 * 创建时间
+	 * 停车时间
 	 */
 	private Date createTime;
+	/**
+	 * 停车时间
+	 */
+	private Date expirationTime;
 
 }

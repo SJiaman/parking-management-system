@@ -20,7 +20,7 @@ import java.util.Map;
  * @date 2022-03-29 12:51:27
  */
 @RestController
-@RequestMapping("app/space")
+@RequestMapping("pms/space")
 public class SpaceController {
     @Autowired
     private SpaceService spaceService;

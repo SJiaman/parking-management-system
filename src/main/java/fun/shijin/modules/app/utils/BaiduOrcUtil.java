@@ -24,9 +24,9 @@ import java.util.HashMap;
 @Configuration
 @EnableConfigurationProperties(BaiduProperties.class)
 public class BaiduOrcUtil {
-
-    // 日志打印
-    private final static Logger LOGGER = LoggerFactory.getLogger(BaiduOrcUtil.class);
+//
+//    // 日志打印
+//    private final static Logger LOGGER = LoggerFactory.getLogger(BaiduOrcUtil.class);
 
     private BaiduProperties baiduProperties;
 
@@ -47,7 +47,8 @@ public class BaiduOrcUtil {
             client.setConnectionTimeoutInMillis(2000);
             client.setSocketTimeoutInMillis(60000);
         } catch (Exception e) {
-            LOGGER.error("百度车牌识别初始化失败，{}", e.getMessage());
+//            LOGGER.error("百度车牌识别初始化失败，{}", e.getMessage());
+            e.printStackTrace();
         }
     }
 
