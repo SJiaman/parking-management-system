@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.Date;
 
@@ -26,9 +27,9 @@ public class AccessInfoEntity implements Serializable {
 	@TableId
 	private Integer id;
 	/**
-	 * 用户id
+	 * 类型
 	 */
-	private Integer userId;
+	private String carType;
 	/**
 	 * 车牌号
 	 */
@@ -40,6 +41,9 @@ public class AccessInfoEntity implements Serializable {
 	/**
 	 * 出去时间
 	 */
-	private Time outTime;
-
+	private Date outTime;
+	/**
+	 * 费用（元）
+	 */
+	private BigDecimal cost;
 }

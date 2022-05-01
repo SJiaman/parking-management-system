@@ -6,10 +6,11 @@
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="fun.shijin.modules.app.entity.AccessInfoEntity" id="accessInfoMap">
         <result property="id" column="id"/>
-        <result property="userId" column="user_id"/>
+        <result property="carType" column="car_type"/>
         <result property="licencePlate" column="licence_plate"/>
         <result property="entryTime" column="entry_time"/>
         <result property="outTime" column="out_time"/>
+        <result property="cost" column="cost"/>
     </resultMap>
 
 

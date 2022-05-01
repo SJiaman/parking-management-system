@@ -7,7 +7,7 @@
     <resultMap type="fun.shijin.modules.app.entity.OrderEntity" id="orderMap">
         <result property="id" column="id"/>
         <result property="orderId" column="order_id"/>
-        <result property="money" column="money"/>
+        <result property="orderCost" column="order_cost"/>
         <result property="licencePlate" column="licence_plate"/>
         <result property="createTime" column="create_time"/>
         <result property="expirationTime" column="expiration_time"/>

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
@@ -31,7 +32,7 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 收费金额
 	 */
-	private Double money;
+	private BigDecimal orderCost;
 	/**
 	 * 车牌号
 	 */
