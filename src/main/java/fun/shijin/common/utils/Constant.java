@@ -22,6 +22,15 @@ import java.util.stream.Stream;
  */
 public class Constant {
     /**
+     * 文件分隔符
+     */
+    public static final String SF_FILE_SEPARATOR = System.getProperty("file.separator");
+
+    public static final String FILE = "file";
+
+    public static final String WINPATH = "f:";
+
+    /**
      * 超级管理员ID
      */
     public static final int SUPER_ADMIN = 1;

@@ -51,3 +51,6 @@ baidu:
     appId: 26072861
     apiKey: cvsNByQayjQOdx6KiLRH2GqM
     secretKey: 0QGaRuq41HvbUEkiMWIUiet50YFFL2th
+
+file:
+    path: /home/file
