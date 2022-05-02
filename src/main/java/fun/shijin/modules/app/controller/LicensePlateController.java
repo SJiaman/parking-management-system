@@ -6,6 +6,9 @@ import cn.hutool.core.util.IdUtil;
 import fun.shijin.common.utils.CommonUtils;
 import fun.shijin.common.utils.Constant;
 import fun.shijin.common.utils.R;
+import fun.shijin.modules.app.service.AccessInfoService;
+import fun.shijin.modules.app.service.LicensePlateService;
+import fun.shijin.modules.app.service.OrderService;
 import fun.shijin.modules.app.utils.BaiduOrcUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +34,13 @@ public class LicensePlateController {
     private String filePath;
 
     @Autowired
-    BaiduOrcUtil baiduOrcUtil;
+    LicensePlateService licensePlateService;
+
+    @Autowired
+    AccessInfoService accessInfoService;
+
+    @Autowired
+    OrderService orderService;
 
     @RequestMapping("/recognition")
     public R recognition(@RequestParam("file") MultipartFile file) throws IOException {
@@ -54,7 +63,7 @@ public class LicensePlateController {
         String imagePath = Constant.WINPATH + filePath +"/" + fileDay + "/" + fileName;
 
         // 车牌识别
-        String platelicense = baiduOrcUtil.platelicense(imagePath);
+        String platelicense = licensePlateService.licensePlateOrc(imagePath);
 
 
         // 判断车牌号是否为空，为空返回识别失败
