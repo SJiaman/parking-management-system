@@ -238,6 +238,12 @@
 			<artifactId>java-sdk</artifactId>
 			<version>4.12.0</version>
 		</dependency>
+		<!--支付吧支付服务-->
+		<dependency>
+			<groupId>com.alipay.sdk</groupId>
+			<artifactId>alipay-sdk-java</artifactId>
+			<version>4.22.113.ALL</version>
+		</dependency>
 	</dependencies>
 
 	<build>

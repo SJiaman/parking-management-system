@@ -18,7 +18,7 @@
 
 
 
-**技术**：Spring Boot,  MySQL,  MyBatis, Vue, Element UI
+**技术**：Spring Boot,  MySQL,  MyBatis-Plus, Vue, Element UI
 
 
 

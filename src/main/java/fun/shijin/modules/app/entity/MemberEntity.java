@@ -24,9 +24,25 @@ public class MemberEntity implements Serializable {
 	@TableId
 	private Integer id;
 	/**
-	 * 角色id
+	 * 用户名
 	 */
-	private Integer userId;
+	private String name;
+	/**
+	 * 性别
+	 */
+	private Integer gender;
+	/**
+	 * 电话号码
+	 */
+	private String phone;
+	/**
+	 * 住址
+	 */
+	private String address;
+	/**
+	 * 车牌号
+	 */
+	private String licencePlate;
 	/**
 	 * 注册时间
 	 */
@@ -34,6 +50,6 @@ public class MemberEntity implements Serializable {
 	/**
 	 * 到期时间
 	 */
-	private String expirationTime;
+	private String expireTime;
 
 }
