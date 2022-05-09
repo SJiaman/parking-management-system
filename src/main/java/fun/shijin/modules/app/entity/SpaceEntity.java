@@ -32,12 +32,16 @@ public class SpaceEntity implements Serializable {
 	 */
 	private String section;
 	/**
-	 * 车位状态
+	 * 会员
+	 */
+	private String member;
+	/**
+	 * 车位状态(0:已售，1:在售)
 	 */
 	private Integer state;
 	/**
 	 * 车位类型(0:固定车位，1:出租车位，2:临时车位)
 	 */
-	private Integer typeId;
+	private Integer type;
 
 }

@@ -2,7 +2,10 @@ package fun.shijin.modules.app.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import fun.shijin.common.utils.PageUtils;
+import fun.shijin.modules.app.entity.AccessInfoEntity;
 import fun.shijin.modules.app.entity.PriceEntity;
+
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -15,5 +18,9 @@ import java.util.Map;
 public interface PriceService extends IService<PriceEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    PriceEntity info();
+
+    BigDecimal costCalculate(AccessInfoEntity accessInfo);
 }
 

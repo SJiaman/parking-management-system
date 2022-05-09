@@ -8,7 +8,7 @@
         <result property="id" column="id"/>
         <result property="orderId" column="order_id"/>
         <result property="orderCost" column="order_cost"/>
-        <result property="licencePlate" column="licence_plate"/>
+        <result property="licensePlate" column="license_plate"/>
         <result property="createTime" column="create_time"/>
         <result property="expirationTime" column="expiration_time"/>
     </resultMap>

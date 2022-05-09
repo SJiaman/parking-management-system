@@ -1,5 +1,6 @@
 package fun.shijin.modules.app.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,6 +25,12 @@ public class ParkingInfoServiceImpl extends ServiceImpl<ParkingInfoDao, ParkingI
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public ParkingInfoEntity info() {
+        ParkingInfoEntity parkingInfo = baseMapper.selectOne(new LambdaQueryWrapper<ParkingInfoEntity>().last("limit 1"));
+        return parkingInfo;
     }
 
 }

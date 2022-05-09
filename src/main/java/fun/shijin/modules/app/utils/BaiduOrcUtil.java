@@ -78,7 +78,7 @@ public class BaiduOrcUtil {
             client.setConnectionTimeoutInMillis(2000);
             client.setSocketTimeoutInMillis(60000);
             HashMap<String, String> options = new HashMap<>();
-            String image = "F:\\home\\file\\2022\\5\\1\\41ed75f9d06a4a2aa126982a8833a5dc.png";
+            String image = "F:\\home\\file\\2022\\5\\1\\41ed75f9d06aa126982a8833a5dc.png";
             /**
              * 是否检测多张车牌，默认为false
              * 当置为true的时候可以对一张图片内的多张车牌进行识别
@@ -87,14 +87,19 @@ public class BaiduOrcUtil {
             // SslUtils.ignoreSsl();
             JSONObject res = client.plateLicense(image, options);
             System.out.println(res.toString());
-            Object result = res.get("words_result");
-            System.out.println(result.toString());
-            JSONArray array = JSON.parseArray(result.toString());
-            System.out.println(array.toString());
-            com.alibaba.fastjson.JSONObject object = JSON.parseObject(array.get(0).toString());
-            System.out.println(object.toString());
-            Object number = object.get("number");
-            System.out.println("车牌:"+number);
+            if (res.has("words_result"))  {
+                Object result = res.get("words_result");
+                System.out.println(result.toString());
+                JSONArray array = JSON.parseArray(result.toString());
+                System.out.println(array.toString());
+                com.alibaba.fastjson.JSONObject object = JSON.parseObject(array.get(0).toString());
+                System.out.println(object.toString());
+                Object number = object.get("number");
+                System.out.println("车牌:"+number);
+            } else {
+                System.out.println("未识别到车牌！");
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

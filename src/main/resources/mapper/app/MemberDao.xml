@@ -11,7 +11,7 @@
         <result property="gender" column="gender"/>
         <result property="phone" column="phone"/>
         <result property="address" column="address"/>
-        <result property="licencePlate" column="licence_plate"/>
+        <result property="spaceNumber" column="space_number"/>
         <result property="createTime" column="create_time"/>
         <result property="expireTime" column="expiration_time"/>
     </resultMap>

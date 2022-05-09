@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fun.shijin.modules.app.dao.SpaceLicenseplateDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="fun.shijin.modules.app.entity.SpaceLicenseplateEntity" id="spaceLicenseplateMap">
+        <result property="id" column="id"/>
+        <result property="spaceId" column="space_id"/>
+        <result property="licensePlate" column="license_plate"/>
+    </resultMap>
+
+
+</mapper>

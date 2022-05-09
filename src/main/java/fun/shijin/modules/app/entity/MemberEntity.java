@@ -40,11 +40,11 @@ public class MemberEntity implements Serializable {
 	 */
 	private String address;
 	/**
-	 * 车牌号
+	 * 车位
 	 */
-	private String licencePlate;
+	private Integer spaceNumber;
 	/**
-	 * 注册时间
+	 * 购买时间
 	 */
 	private String createTime;
 	/**

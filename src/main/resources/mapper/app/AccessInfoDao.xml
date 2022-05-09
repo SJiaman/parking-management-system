@@ -7,7 +7,7 @@
     <resultMap type="fun.shijin.modules.app.entity.AccessInfoEntity" id="accessInfoMap">
         <result property="id" column="id"/>
         <result property="carType" column="car_type"/>
-        <result property="licencePlate" column="licence_plate"/>
+        <result property="licensePlate" column="license_plate"/>
         <result property="entryTime" column="entry_time"/>
         <result property="outTime" column="out_time"/>
         <result property="cost" column="cost"/>

@@ -7,9 +7,10 @@
     <resultMap type="fun.shijin.modules.app.entity.SpaceEntity" id="spaceMap">
         <result property="id" column="id"/>
         <result property="number" column="number"/>
+        <result property="member" column="member"/>
         <result property="section" column="section"/>
         <result property="state" column="state"/>
-        <result property="typeId" column="type_id"/>
+        <result property="type" column="type"/>
     </resultMap>
 
 

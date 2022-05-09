@@ -1,5 +1,6 @@
 package fun.shijin.modules.app.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import fun.shijin.common.utils.PageUtils;
 import fun.shijin.common.utils.R;
 import fun.shijin.modules.app.entity.ParkingInfoEntity;
@@ -40,10 +41,11 @@ public class ParkingInfoController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
-    @RequiresPermissions("pms:parkinginfo:info")
-    public R info(@PathVariable("id") Integer id){
-		ParkingInfoEntity parkingInfo = parkingInfoService.getById(id);
+    @RequestMapping("/info")
+//    @RequiresPermissions("pms:parkinginfo:info")
+    public R info(){
+
+        ParkingInfoEntity parkingInfo = parkingInfoService.getOne(new LambdaQueryWrapper<ParkingInfoEntity>().last("limit 1"));
 
         return R.ok().put("parkingInfo", parkingInfo);
     }

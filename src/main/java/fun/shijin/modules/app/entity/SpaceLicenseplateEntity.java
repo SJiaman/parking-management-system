@@ -1,24 +1,22 @@
 package fun.shijin.modules.app.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 订单表
+ * 
  * 
  * @author tcq
  * @email 2433313140@qq.com
- * @date 2022-04-27 13:23:20
+ * @date 2022-05-08 20:21:03
  */
 @Data
-@TableName("pms_order")
-public class OrderEntity implements Serializable {
+@TableName("pms_space_licenseplate")
+public class SpaceLicenseplateEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -27,25 +25,12 @@ public class OrderEntity implements Serializable {
 	@TableId
 	private Integer id;
 	/**
-	 * 订单号
+	 * 车位id
 	 */
-	private Integer orderId;
-	/**
-	 * 收费金额
-	 */
-	private BigDecimal orderCost;
+	private Integer spaceId;
 	/**
 	 * 车牌号
 	 */
 	private String licensePlate;
-	/**
-	 * 停车时间
-	 */
-
-	private Date createTime;
-	/**
-	 * 停车时间
-	 */
-	private Date expirationTime;
 
 }

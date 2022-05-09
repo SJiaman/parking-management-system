@@ -1,5 +1,7 @@
 package fun.shijin.modules.app.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -38,8 +40,17 @@ public class PriceEntity implements Serializable {
 	 */
 	private BigDecimal unitCost;
 	/**
+	 * 每天最大收费
+	 */
+	private BigDecimal dayMaxCost;
+	/**
+	 * 收费模式
+	 */
+	private Integer chargeMode;
+	/**
 	 * 创建时间
 	 */
+	@TableField(fill = FieldFill.INSERT_UPDATE)
 	private Date createTime;
 
 }

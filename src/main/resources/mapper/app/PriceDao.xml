@@ -9,6 +9,8 @@
         <result property="freeTime" column="free_time"/>
         <result property="timeUnit" column="time_unit"/>
         <result property="unitCost" column="unit_cost"/>
+        <result property="dayMaxCost" column="day_max_cost"/>
+        <result property="chargeMode" column="charge_mode"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 

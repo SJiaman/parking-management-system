@@ -1,5 +1,7 @@
 package fun.shijin.modules.app.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -29,14 +31,15 @@ public class AccessInfoEntity implements Serializable {
 	/**
 	 * 类型
 	 */
-	private String carType;
+	private Integer carType;
 	/**
 	 * 车牌号
 	 */
-	private String licencePlate;
+	private String licensePlate;
 	/**
 	 * 进入时间
 	 */
+	@TableField(fill = FieldFill.INSERT)
 	private Date entryTime;
 	/**
 	 * 出去时间

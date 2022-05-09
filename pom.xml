@@ -244,6 +244,12 @@
 			<artifactId>alipay-sdk-java</artifactId>
 			<version>4.22.113.ALL</version>
 		</dependency>
+		<!--		excel导出-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>easyexcel</artifactId>
+			<version>3.0.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>

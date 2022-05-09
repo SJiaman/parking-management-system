@@ -22,6 +22,28 @@ import java.util.stream.Stream;
  */
 public class Constant {
     /**
+     * 支付状态 1 ：支付 0：未支付
+     */
+    public static final Short PAY_STATUS_NO = 0;
+
+    public static final Short PAY_STATUS_YES = 1;
+
+    /**
+     * 类型  0：包月车  1：VIP免费车 2：临时
+     */
+    public static final String CAR_TYPE_VIP = "会员免费车";
+
+    public static final String CAR_TYPE_TEMP = "临时车";
+
+    /**
+     * 类型  0：后进收费  1：先出收费
+     */
+    public static final Integer CHARGE_MODE_LAST_ENTRY = 0;
+
+    public static final Integer CHARGE_MODE_FIRST_OUT = 1;
+
+
+    /**
      * 文件分隔符
      */
     public static final String SF_FILE_SEPARATOR = System.getProperty("file.separator");
