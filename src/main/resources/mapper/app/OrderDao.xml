@@ -6,11 +6,13 @@
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="fun.shijin.modules.app.entity.OrderEntity" id="orderMap">
         <result property="id" column="id"/>
-        <result property="orderId" column="order_id"/>
+        <result property="orderId" column="order_number"/>
         <result property="orderCost" column="order_cost"/>
         <result property="licensePlate" column="license_plate"/>
         <result property="createTime" column="create_time"/>
-        <result property="expirationTime" column="expiration_time"/>
+        <result property="parkTime" column="park_time"/>
+        <result property="state" column="state"/>
+        <result property="remark" column="remark"/>
     </resultMap>
 
 

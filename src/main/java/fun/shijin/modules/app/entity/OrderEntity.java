@@ -29,7 +29,7 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 订单号
 	 */
-	private Integer orderId;
+	private String orderNumber;
 	/**
 	 * 收费金额
 	 */
@@ -46,6 +46,14 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 停车时间
 	 */
-	private Date expirationTime;
+	private String parkTime;
+	/**
+	 * 支付状态
+	 */
+	private Integer state;
+	/**
+	 * 备注
+	 */
+	private Date remark;
 
 }

@@ -75,18 +75,9 @@ public class AccessController {
         if (licensePlate == null || licensePlate.length() == 0) {
             return R.error().put("data", "识别失败,请重新扫描车牌");
         }
-        AccessInfoEntity accessInfoEntity = accessInfoService.
-                getOne(new LambdaQueryWrapper<AccessInfoEntity>()
-                        .eq(AccessInfoEntity::getLicensePlate, licensePlate)
-                        .isNull(AccessInfoEntity::getOutTime));
 
-        if (accessInfoEntity.getCarType() == 1) {
-            return R.ok().put("outMsg", "会员车" + licensePlate + "祝你一路平安");
-        }
-
-        BigDecimal cost = priceService.costCalculate(accessInfoEntity);
-
-        return R.ok().put("outMsg", "临时车" + licensePlate + "祝你一路平安");
+        Map<String, Object> map = accessInfoService.outParking(licensePlate);
+        return R.ok(map);
     }
 
 

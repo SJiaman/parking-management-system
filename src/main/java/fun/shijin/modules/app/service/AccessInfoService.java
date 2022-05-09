@@ -31,7 +31,7 @@ public interface AccessInfoService extends IService<AccessInfoEntity> {
      * 出库
      * @return
      */
-    Map<String, Object> outParking(String platelicense, PriceEntity price);
+    Map<String, Object> outParking(String platelicense);
 
 
     /**
