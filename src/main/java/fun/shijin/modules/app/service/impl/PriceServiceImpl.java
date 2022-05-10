@@ -1,5 +1,6 @@
 package fun.shijin.modules.app.service.impl;
 
+import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
@@ -12,9 +13,11 @@ import fun.shijin.modules.app.service.PriceService;;
 import fun.shijin.modules.app.service.SpaceLicenseplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Map;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -48,82 +51,41 @@ public class PriceServiceImpl extends ServiceImpl<PriceDao, PriceEntity> impleme
 
     @Override
     public BigDecimal costCalculate(AccessInfoEntity accessInfo) {
-        PriceEntity price = baseMapper.selectOne(new LambdaQueryWrapper<PriceEntity>().last("limit 1"));
-//        // 1.检测车牌是否有车位
-//        String licensePlate = accessInfo.getLicensePlate();
-//        Boolean flag = false;
-//
-//        Long subTime = 0L;
-//        int record = spaceLicenseplateService.count(
-//                new LambdaQueryWrapper<SpaceLicenseplateEntity>()
-//                        .eq(SpaceLicenseplateEntity::getLicensePlate, licensePlate));
-
-        // 如果有，车位里是否已经停车，
-        // 第一种收费模式，后进收费，比较两车进入时间，后进入车辆收费
-//        // 第二种收费模式，先出收费，判断两车共同停车时间，收共同停车时长的车费
-//        if (record != 0 && price.getChargeMode() == 1) {
-//            List<Date> dates = accessService.queryRecord(licensePlate);
-//            if (dates.size() > 1) {
-//                subTime = DateUtil.between(dates.get(0), dates.get(1), DateUnit.MINUTE);
-//            } else {
-//
-//            }
-//        }
-
-//        if (flag) {
-//            accessInfo.setCarType(1);
-//        }
-//
-//
-//        if (price.getChargeMode() == 0) {
-//
-//        }
-
-        // 第一步先获取时间间隔
-        Long betweenMinute = DateUtil.between(accessInfo.getEntryTime(), DateUtil.parse(DateUtil.now()), DateUnit.MINUTE);
-
-        Long payTime = betweenMinute - price.getFreeTime();
-        if (payTime <= 0 ) {
-            return new BigDecimal(BigInteger.ZERO);
+        DateTime outTime = DateUtil.parse(DateUtil.now());
+        long betweenDay = DateUtil.between(accessInfo.getEntryTime(), outTime, DateUnit.DAY);
+        long betweenMinute = DateUtil.between(accessInfo.getEntryTime(), outTime, DateUnit.MINUTE);
+        if (betweenDay < 0) {
+            return dayCostCalculate(betweenMinute, betweenDay);
         }
-        
+        betweenMinute = betweenMinute - (60 * 24 * betweenDay);
+        return dayCostCalculate(betweenMinute, betweenDay);
+    }
+
+
+    private BigDecimal dayCostCalculate(Long time, Long day) {
+        PriceEntity price = baseMapper.selectOne(new LambdaQueryWrapper<PriceEntity>().last("limit 1"));
+//        // 第一步先获取时间间隔
+//        Long betweenMinute = DateUtil.between(accessInfo.getEntryTime(), DateUtil.parse(DateUtil.now()), DateUnit.MINUTE);
+        BigDecimal totalCost = new BigDecimal(0);
+        if (day > 0) {
+            totalCost = NumberUtil.mul(day, price.getDayMaxCost());
+        }
+
+        Long payTime = time - price.getFreeTime();
+
+        if (payTime <= 0) {
+            return NumberUtil.add(totalCost, new BigDecimal(BigInteger.ZERO));
+        }
         BigDecimal count = NumberUtil.div(payTime, price.getTimeUnit());
         count = NumberUtil.round(count, 0);
 
         BigDecimal cost = NumberUtil.mul(count, price.getUnitCost());
         cost = NumberUtil.round(cost, 0);
 
-        if (cost.compareTo(price.getDayMaxCost()) > 1) {
-            return price.getDayMaxCost();
+        if (cost.compareTo(price.getDayMaxCost()) < 0) {
+            return NumberUtil.add(totalCost, cost);
         } else {
-            return cost;
+            return NumberUtil.add(totalCost, price.getDayMaxCost());
         }
-    
     }
-
-
-//    private BigDecimal Calculate() {
-//
-//        // 第一步先获取时间间隔
-//        Long betweenMinute = DateUtil.between(accessInfo.getEntryTime(), DateUtil.parse(DateUtil.now()), DateUnit.MINUTE);
-//
-//        Long payTime = betweenMinute - price.getFreeTime();
-//
-//        if (payTime > 0) {
-//            BigDecimal count = NumberUtil.div(payTime, price.getTimeUnit());
-//            count = NumberUtil.round(count, 0);
-//
-//            BigDecimal cost = NumberUtil.mul(count, price.getUnitCost());
-//            cost = NumberUtil.round(cost, 0);
-//
-//            if (cost.compareTo(price.getDayMaxCost()) > 1) {
-//                return price.getDayMaxCost();
-//            } else {
-//                return cost;
-//            }
-//        } else {
-//            return new BigDecimal(BigInteger.ZERO);
-//        }
-//    }
-
 }
