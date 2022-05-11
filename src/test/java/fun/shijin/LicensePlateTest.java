@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @Author Jiaman
@@ -59,5 +60,17 @@ public class LicensePlateTest {
 //
 //        DateTime date = DateUtil.date(yesterday);
 //        System.out.println(date1);
+    }
+
+    @Test
+    public void testDate() {
+        String dateStr1 = "2017-04-01 22:33:23";
+        Date date1 = DateUtil.parse(dateStr1);
+
+        String dateStr2 = "2017-04-08 23:33:23";
+        Date date2 = DateUtil.parse(dateStr2);
+
+//相差一个月，31天
+        long betweenDay = DateUtil.between(date1, date2, DateUnit.DAY);
     }
 }

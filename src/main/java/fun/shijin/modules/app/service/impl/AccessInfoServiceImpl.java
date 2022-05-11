@@ -1,6 +1,7 @@
 package fun.shijin.modules.app.service.impl;
 
 import cn.hutool.core.date.BetweenFormater;
+import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -15,10 +16,7 @@ import fun.shijin.modules.app.entity.AccessInfoEntity;
 import fun.shijin.modules.app.entity.OrderEntity;
 import fun.shijin.modules.app.entity.PriceEntity;
 import fun.shijin.modules.app.entity.SpaceLicenseplateEntity;
-import fun.shijin.modules.app.service.AccessInfoService;
-import fun.shijin.modules.app.service.OrderService;
-import fun.shijin.modules.app.service.PriceService;
-import fun.shijin.modules.app.service.SpaceLicenseplateService;
+import fun.shijin.modules.app.service.*;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +38,7 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
     SpaceLicenseplateService spaceLicenseplateService;
 
     @Autowired
-    PriceService priceService;
+    PayService payService;
 
     @Autowired
     OrderService orderService;
@@ -55,65 +53,78 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
         return new PageUtils(page);
     }
 
+    /**
+     * 入库服务
+     *
+     * @param licensePlate
+     * @return
+     */
     @Override
     public Map<String, Object> entryParking(String licensePlate) {
         HashMap<String, Object> data = new HashMap<>();
+        // 创建进出记录
         AccessInfoEntity accessInfoEntity = new AccessInfoEntity();
         int record = spaceLicenseplateService.count(
                 new LambdaQueryWrapper<SpaceLicenseplateEntity>()
                         .eq(SpaceLicenseplateEntity::getLicensePlate, licensePlate));
+
+        // 设置停车类型
         if (record != 0) {
             accessInfoEntity.setCarType(1);
             data.put("carType", "会员车");
+            data.put("entryMsg", "会员车"+ licensePlate + "欢迎入库");
         } else {
             accessInfoEntity.setCarType(0);
             data.put("carType", "临时车");
-            OrderEntity orderEntity = new OrderEntity();
-            orderEntity.setLicensePlate(licensePlate);
-            //时间戳
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-            //生成两位数的随机数
-            int random = RandomUtils.nextInt(100) + 10;
-            String value =  format.format(new Date()) + random;
-            orderEntity.setOrderNumber(value);
-            orderEntity.setState(0);
-            orderService.save(orderEntity);
+            data.put("entryMsg", "临时车"+ licensePlate + "欢迎入库");
         }
+
+        // 设置车牌
         accessInfoEntity.setLicensePlate(licensePlate);
+
+        // 设置进库时间
         accessInfoEntity.setEntryTime(DateUtil.parse(DateUtil.now()));
         baseMapper.insert(accessInfoEntity);
         return data;
     }
 
+    /**
+     * 出库服务
+     *
+     * @param licensePlate
+     * @return
+     */
     @Override
     public Map<String, Object> outParking(String licensePlate) {
-        // 出库，计算价格
-        //
         HashMap<String, Object> data = new HashMap<>();
+        // 查询停车记录
         AccessInfoEntity accessInfoEntity = baseMapper.
                 selectOne(new LambdaQueryWrapper<AccessInfoEntity>()
                         .eq(AccessInfoEntity::getLicensePlate, licensePlate)
                         .isNull(AccessInfoEntity::getOutTime));
 
-        accessInfoEntity.setOutTime(DateUtil.parse(DateUtil.now()));
+        DateTime outTime = DateUtil.parse(DateUtil.now());
+        // 设置出库时间
+        accessInfoEntity.setOutTime(outTime);
+
+        // 设置停车时间
+        String betweenTime = DateUtil.formatBetween(accessInfoEntity.getEntryTime(), accessInfoEntity.getOutTime(),
+                BetweenFormater.Level.MINUTE);
+        accessInfoEntity.setParkTime(betweenTime);
+
+        //  更新记录
+        baseMapper.updateById(accessInfoEntity);
+
+        // 会员车直接出库
         if (accessInfoEntity.getCarType() == 1) {
-            accessInfoEntity.setCost(BigDecimal.ZERO);
-            baseMapper.updateById(accessInfoEntity);
+            data.put("carType", accessInfoEntity.getCarType());
             data.put("outMsg", "会员车" + licensePlate + "祝你一路平安");
             return data;
         }
-        BigDecimal cost = priceService.costCalculate(accessInfoEntity);
-        accessInfoEntity.setCost(cost);
-        baseMapper.updateById(accessInfoEntity);
-        OrderEntity order = orderService.getOne(new LambdaQueryWrapper<OrderEntity>()
-                .eq(OrderEntity::getLicensePlate, licensePlate)
-                .eq(OrderEntity::getState, 0));
-        order.setOrderCost(cost);
-        order.setCreateTime(DateUtil.parse(DateUtil.now()));
-        long between = DateUtil.between(accessInfoEntity.getEntryTime(), accessInfoEntity.getOutTime(), DateUnit.MINUTE);
-        order.setParkTime(DateUtil.formatBetween(between, BetweenFormater.Level.MINUTE));
-        orderService.updateById(order);
-        data.put("outMsg", "会员车" + licensePlate + cost + "祝你一路平安" );
+
+        // 非会员车，付停车费
+        data.put("outMsg", "临时车" + licensePlate + "祝你一路平安" );
+        data.put("accessInfoEntity", accessInfoEntity);
         return data;
     }
 
@@ -121,6 +132,4 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
     public List<Date> queryRecord(String licenseplate) {
         return accessDao.queryRecord(licenseplate);
     }
-
-
 }

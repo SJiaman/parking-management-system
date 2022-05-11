@@ -46,7 +46,7 @@ public class AccessInfoEntity implements Serializable {
 	 */
 	private Date outTime;
 	/**
-	 * 费用（元）
+	 * 停车时间
 	 */
-	private BigDecimal cost;
+	private String parkTime;
 }

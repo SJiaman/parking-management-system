@@ -45,7 +45,6 @@ public class AccessController {
      * 有无空位，识别车牌，增加记录
      */
     @RequestMapping("/entry")
-//    @RequiresPermissions("pms:accessinfo:list")
     public R entryParking(@RequestParam("file") MultipartFile file) {
         ParkingInfoEntity parkingInfo = parkingInfoService.info();
 
@@ -68,7 +67,6 @@ public class AccessController {
      * 出库
      */
     @RequestMapping("/out")
-//    @RequiresPermissions("pms:accessinfo:list")
     public R outParking(@RequestParam("file") MultipartFile file) {
         String licensePlate = licensePlateService.licensePlateOrc(file);
         // 判断车牌号是否为空，为空返回识别失败

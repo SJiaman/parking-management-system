@@ -30,9 +30,6 @@ public class PriceServiceImpl extends ServiceImpl<PriceDao, PriceEntity> impleme
     @Autowired
     AccessInfoService accessService;
 
-    @Autowired
-    SpaceLicenseplateService spaceLicenseplateService;
-
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<PriceEntity> page = this.page(
@@ -64,8 +61,7 @@ public class PriceServiceImpl extends ServiceImpl<PriceDao, PriceEntity> impleme
 
     private BigDecimal dayCostCalculate(Long time, Long day) {
         PriceEntity price = baseMapper.selectOne(new LambdaQueryWrapper<PriceEntity>().last("limit 1"));
-//        // 第一步先获取时间间隔
-//        Long betweenMinute = DateUtil.between(accessInfo.getEntryTime(), DateUtil.parse(DateUtil.now()), DateUnit.MINUTE);
+        // 第一步先获取时间间隔
         BigDecimal totalCost = new BigDecimal(0);
         if (day > 0) {
             totalCost = NumberUtil.mul(day, price.getDayMaxCost());
