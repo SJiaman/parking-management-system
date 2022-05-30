@@ -1,10 +1,12 @@
 package fun.shijin.modules.app.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 车位表
@@ -44,4 +46,6 @@ public class SpaceEntity implements Serializable {
 	 */
 	private Integer type;
 
+	@TableField(exist = false)
+	private  List<SpaceLicenseplateEntity> licenseplate;
 }

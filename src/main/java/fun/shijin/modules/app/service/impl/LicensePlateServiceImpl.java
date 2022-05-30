@@ -16,8 +16,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
@@ -72,4 +74,46 @@ public class LicensePlateServiceImpl implements LicensePlateService {
             return "未识别到车牌！";
         }
     }
+
+    public static void main(String[] args) {
+        String  path = "F:\\graduationproject\\pms\\parking-management-system\\src\\main\\java\\fun\\shijin\\modules\\lpr\\data\\f5ab7489e5dd4494b905f0b3ca5f9180.png";
+        try {
+            String[] arg = new String[] { "python", "F:\\graduationproject\\pms\\parking-management-system\\src\\main\\java\\fun\\shijin\\modules\\lpr\\lpr_demo.py", String.valueOf(path) };
+            // 执行py文件
+            Process proc = Runtime.getRuntime().exec(arg);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            in.close();
+            proc.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public  LPR() {
+//        String  path = "F:\\graduationproject\\pms\\parking-management-system\\src\\main\\java\\fun\\shijin\\modules\\lpr\\data\\f5ab7489e5dd4494b905f0b3ca5f9180.png"
+//        try {
+//            String[] args = new String[] { "python", "fun/shijin/modules/lpr/lpr_demo.py", String.valueOf(path) };
+//            // 执行py文件
+//            Process proc = Runtime.getRuntime().exec(args[1]);
+//
+//            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+//            String line = null;
+//            while ((line = in.readLine()) != null) {
+//                System.out.println(line);
+//            }
+//            in.close();
+//            proc.waitFor();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

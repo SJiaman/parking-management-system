@@ -1,10 +1,13 @@
 package fun.shijin.modules.app.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import fun.shijin.modules.app.entity.OrderEntity;
 import fun.shijin.modules.app.service.OrderService;
+import fun.shijin.modules.app.utils.ExcelUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fun.shijin.common.utils.PageUtils;
 import fun.shijin.common.utils.R;
 
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -39,6 +43,17 @@ public class OrderController {
         PageUtils page = orderService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/download")
+//    @RequiresPermissions("pms:order:list")
+    public void download(HttpServletResponse response) throws Exception {
+        List<OrderEntity> orderEntities = orderService.getBaseMapper().selectList(null);
+//        ArrayList<OrderEntity> orderEntities = new ArrayList<>();
+        ExcelUtil.writeExcel(response, orderEntities, "停车收费订单信息", "停车收费订单信息", OrderEntity.class);
     }
 
 
@@ -71,6 +86,7 @@ public class OrderController {
     @RequiresPermissions("pms:order:update")
     public R update(@RequestBody OrderEntity order){
 		orderService.updateById(order);
+
 
         return R.ok();
     }

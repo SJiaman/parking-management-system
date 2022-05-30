@@ -1,14 +1,18 @@
 package fun.shijin.modules.app.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import fun.shijin.common.utils.PageUtils;
 import fun.shijin.common.utils.R;
 import fun.shijin.modules.app.entity.SpaceEntity;
+import fun.shijin.modules.app.entity.SpaceLicenseplateEntity;
+import fun.shijin.modules.app.service.SpaceLicenseplateService;
 import fun.shijin.modules.app.service.SpaceService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +28,9 @@ import java.util.Map;
 public class SpaceController {
     @Autowired
     private SpaceService spaceService;
+
+    @Autowired
+    private SpaceLicenseplateService spaceLicenseplateService;
 
     /**
      * 列表
@@ -45,7 +52,10 @@ public class SpaceController {
     @RequiresPermissions("pms:space:info")
     public R info(@PathVariable("id") Integer id){
 		SpaceEntity space = spaceService.getById(id);
-
+        LambdaQueryWrapper<SpaceLicenseplateEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(SpaceLicenseplateEntity::getSpaceId,space.getId());
+        List<SpaceLicenseplateEntity> list = spaceLicenseplateService.list(wrapper);
+        space.setLicenseplate(list);
         return R.ok().put("space", space);
     }
 

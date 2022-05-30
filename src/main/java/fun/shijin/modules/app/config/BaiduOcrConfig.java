@@ -21,7 +21,9 @@ public class BaiduOcrConfig {
 
     @Bean
     public AipOcr baiduOrcClient() {
-        AipOcr aipOcr = new AipOcr(config.getProperty("baidu.appId"), config.getProperty("baidu.apiKey"),
+        AipOcr aipOcr = new AipOcr(
+                config.getProperty("baidu.appId"),
+                config.getProperty("baidu.apiKey"),
                 config.getProperty("baidu.secretKey"));
         aipOcr.setConnectionTimeoutInMillis(2000);
         aipOcr.setSocketTimeoutInMillis(60000);

@@ -12,11 +12,11 @@ import fun.shijin.common.utils.PageUtils;
 import fun.shijin.common.utils.Query;
 import fun.shijin.common.utils.R;
 import fun.shijin.modules.app.dao.AccessInfoDao;
-import fun.shijin.modules.app.entity.AccessInfoEntity;
-import fun.shijin.modules.app.entity.OrderEntity;
-import fun.shijin.modules.app.entity.PriceEntity;
-import fun.shijin.modules.app.entity.SpaceLicenseplateEntity;
+import fun.shijin.modules.app.dao.ParkingInfoDao;
+import fun.shijin.modules.app.entity.*;
 import fun.shijin.modules.app.service.*;
+import io.netty.util.internal.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,12 +42,18 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
 
     @Autowired
     OrderService orderService;
+    private ParkingInfoDao parkingInfoDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+
+        String licensePlate = (String)params.get("key");
+
+
         IPage<AccessInfoEntity> page = this.page(
                 new Query<AccessInfoEntity>().getPage(params),
                 new QueryWrapper<AccessInfoEntity>()
+                        .like(StringUtils.isNotBlank(licensePlate),"license_plate", licensePlate)
         );
 
         return new PageUtils(page);
@@ -81,6 +87,11 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
 
         // 设置车牌
         accessInfoEntity.setLicensePlate(licensePlate);
+
+        ParkingInfoEntity parkingInfoEntity = parkingInfoDao.selectOne(null);
+        parkingInfoEntity.setSurplusSpaces(parkingInfoEntity.getSurplusSpaces() - 1);
+
+        parkingInfoDao.updateById(parkingInfoEntity);
 
         // 设置进库时间
         accessInfoEntity.setEntryTime(DateUtil.parse(DateUtil.now()));

@@ -11,6 +11,7 @@
         <result property="entryTime" column="entry_time"/>
         <result property="outTime" column="out_time"/>
         <result property="parkTime" column="park_time"/>
+        <result property="remark" column="remark"/>
     </resultMap>
 
 

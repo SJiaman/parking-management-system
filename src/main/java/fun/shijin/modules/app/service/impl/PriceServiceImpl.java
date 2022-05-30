@@ -42,8 +42,7 @@ public class PriceServiceImpl extends ServiceImpl<PriceDao, PriceEntity> impleme
 
     @Override
     public PriceEntity info() {
-        PriceEntity price = baseMapper.selectOne(new LambdaQueryWrapper<PriceEntity>().last("limit 1"));
-        return price;
+        return baseMapper.selectOne(new LambdaQueryWrapper<PriceEntity>().last("limit 1"));
     }
 
     @Override
@@ -72,6 +71,8 @@ public class PriceServiceImpl extends ServiceImpl<PriceDao, PriceEntity> impleme
         if (payTime <= 0) {
             return NumberUtil.add(totalCost, new BigDecimal(BigInteger.ZERO));
         }
+
+
         BigDecimal count = NumberUtil.div(payTime, price.getTimeUnit());
         count = NumberUtil.round(count, 0);
 

@@ -49,4 +49,8 @@ public class AccessInfoEntity implements Serializable {
 	 * 停车时间
 	 */
 	private String parkTime;
+	/**
+	 * 备注
+	 */
+	private String remark;
 }

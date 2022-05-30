@@ -1,5 +1,6 @@
 package fun.shijin.modules.app.entity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -29,23 +30,27 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 订单号
 	 */
+	@ExcelProperty("订单号")
 	private String orderNumber;
 	/**
 	 * 收费金额
 	 */
+	@ExcelProperty("收费金额")
 	private BigDecimal orderCost;
 	/**
 	 * 车牌号
 	 */
+	@ExcelProperty("车牌号")
 	private String licensePlate;
 	/**
-	 * 停车时间
+	 * 创建时间
 	 */
-
+	@ExcelProperty("创建时间")
 	private Date createTime;
 	/**
 	 * 停车时间
 	 */
+	@ExcelProperty("停车时间")
 	private String parkTime;
 	/**
 	 * 支付状态

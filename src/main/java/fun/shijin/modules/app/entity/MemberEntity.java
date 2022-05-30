@@ -2,9 +2,11 @@ package fun.shijin.modules.app.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 会员表
@@ -46,10 +48,12 @@ public class MemberEntity implements Serializable {
 	/**
 	 * 购买时间
 	 */
-	private String createTime;
+	@JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Date createTime;
 	/**
 	 * 到期时间
 	 */
-	private String expireTime;
+	@JsonFormat(pattern = "YYYY-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Date expireTime;
 
 }
