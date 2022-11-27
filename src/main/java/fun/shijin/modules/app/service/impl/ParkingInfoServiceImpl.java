@@ -36,10 +36,10 @@ public class ParkingInfoServiceImpl extends ServiceImpl<ParkingInfoDao, ParkingI
 
     @Override
     public ParkingInfoEntity info() {
-        InfoCard infoCard = new InfoCard();
-        List<String> orderinfo = orderDao.orderinfo();
-        infoCard.setTotalOrder(orderinfo.get(0));
-        infoCard.setTotalOrderCost(orderinfo.get(1));
+//        InfoCard infoCard = new InfoCard();
+//        List<String> orderinfo = orderDao.orderinfo();
+//        infoCard.setTotalOrder(orderinfo.get(0));
+//        infoCard.setTotalOrderCost(orderinfo.get(1));
 
 
         return baseMapper.selectOne(new LambdaQueryWrapper<ParkingInfoEntity>().last("limit 1"));

@@ -19,7 +19,7 @@ import java.util.List;
 @Repository
 public interface OrderDao extends BaseMapper<OrderEntity> {
 
-    @Select("selectcount(*),sum(order_cost) from pms_order")
+    @Select("select count(*),sum(order_cost) from pms_order")
     List<String> orderinfo();
 	
 }

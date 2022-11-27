@@ -47,9 +47,10 @@ public class PriceServiceImpl extends ServiceImpl<PriceDao, PriceEntity> impleme
 
     @Override
     public BigDecimal costCalculate(AccessInfoEntity accessInfo) {
-        DateTime outTime = DateUtil.parse(DateUtil.now());
-        long betweenDay = DateUtil.between(accessInfo.getEntryTime(), outTime, DateUnit.DAY);
-        long betweenMinute = DateUtil.between(accessInfo.getEntryTime(), outTime, DateUnit.MINUTE);
+//        DateTime outTime = DateUtil.parse(DateUtil.now());
+        //
+        long betweenDay = DateUtil.between(accessInfo.getEntryTime(), accessInfo.getOutTime(), DateUnit.DAY);
+        long betweenMinute = DateUtil.between(accessInfo.getEntryTime(), accessInfo.getOutTime(), DateUnit.MINUTE);
         if (betweenDay < 0) {
             return dayCostCalculate(betweenMinute, betweenDay);
         }

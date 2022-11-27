@@ -42,6 +42,7 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
 
     @Autowired
     OrderService orderService;
+    @Autowired
     private ParkingInfoDao parkingInfoDao;
 
     @Override
@@ -88,9 +89,9 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
         // 设置车牌
         accessInfoEntity.setLicensePlate(licensePlate);
 
+        // 停车场车位数更新
         ParkingInfoEntity parkingInfoEntity = parkingInfoDao.selectOne(null);
         parkingInfoEntity.setSurplusSpaces(parkingInfoEntity.getSurplusSpaces() - 1);
-
         parkingInfoDao.updateById(parkingInfoEntity);
 
         // 设置进库时间
@@ -125,6 +126,11 @@ public class AccessInfoServiceImpl extends ServiceImpl<AccessInfoDao, AccessInfo
 
         //  更新记录
         baseMapper.updateById(accessInfoEntity);
+
+        // 停车场车位数更新
+        ParkingInfoEntity parkingInfoEntity = parkingInfoDao.selectOne(null);
+        parkingInfoEntity.setSurplusSpaces(parkingInfoEntity.getSurplusSpaces() + 1);
+        parkingInfoDao.updateById(parkingInfoEntity);
 
         // 会员车直接出库
         if (accessInfoEntity.getCarType() == 1) {
